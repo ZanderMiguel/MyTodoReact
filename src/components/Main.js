@@ -1,31 +1,47 @@
 import React from "react";
 import { useState } from "react";
+import List from "./List";
 
 const Main = () => {
-  const [name, setName] = useState("Zander");
-  const [count, setCount] = useState(0);
+  const [items, setItems] = useState([
+    {
+      id: 1,
+      checked: false,
+      label: "Item 1",
+    },
+    {
+      id: 2,
+      checked: false,
+      label: "Item 2",
+    },
+    {
+      id: 3,
+      checked: false,
+      label: "Item 3",
+    },
+  ]);
 
-  // const handleChangeName = () => {
-  //   const name = ["Mark", "Zander", "Kerwin"];
-  //   const ranNum = Math.floor(Math.random() * 3);
+  const handleChecked = (id) => {
+    const listItems = items.map((item) =>
+      item.id === id ? { ...item, checked: !item.checked } : item
+    );
+    setItems(listItems);
+    localStorage.setItem("shopppinglist", JSON.stringify(listItems));
+  };
 
-  //   setName(name[ranNum]);
-  //   console.log(ranNum);
-  // };
-
-  // const handleClick = (name) => {
-  //   console.log(name);
-  // };
+  const handleDelete = (id) => {
+    const listItems = items.filter((item) => item.id !== id);
+    setItems(listItems);
+    localStorage.setItem("shopppinglist", JSON.stringify(listItems));
+  };
 
   return (
     <main>
-      <p>
-        Hello {name}! {count}
-      </p>
-      <ul></ul>
-
-      {/* <button onClick={handleChangeName}>Click</button> */}
-      {/* <button onClick={() => setCount(count + 1)}> Count</button> */}
+      <List
+        items={items}
+        handleChecked={handleChecked}
+        handleDelete={handleDelete}
+      />
     </main>
   );
 };
