@@ -27,17 +27,40 @@ label,
 button {
   margin-left: 1rem;
 }
+button {
+  height: 40px;
+  width: 50px;
+}
 
 .containder-input {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+.list input[type="checkbox"] {
+  height: 25px;
+  width: 25px;
+}
+
+/* Adding Form */
+.addItem label {
+  position: absolute;
+  left: -9999999999px;
+}
+
+.addItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addItem input[type="text"] {
+  height: 3rem;
+  font-size: 1rem;
+  padding: 0.25rem;
+}
 /* Footer styles  */
 footer p {
   margin-top: 1rem;
-}
-input {
-  height: 25px;
-  width: 25px;
 }

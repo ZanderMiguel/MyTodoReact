@@ -3,7 +3,7 @@ import React from "react";
 const ListItems = ({ items, handleChecked, handleDelete }) => {
   return (
     <>
-      <ul>
+      <ul className="list">
         {items.map((item) => (
           <li key={item.id}>
             <div className="containder-input">

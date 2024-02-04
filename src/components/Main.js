@@ -1,8 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import List from "./List";
+import AddingForm from "./AddingForm";
 
 const Main = () => {
+  // Adding form
+  const [newItem, setNewItem] = useState("");
   const [items, setItems] = useState([
     {
       id: 1,
@@ -21,6 +24,11 @@ const Main = () => {
     },
   ]);
 
+  const setAndSaveItems = (newItems) => {
+    setItems(newItems);
+    localStorage.setItem("shopppinglist", JSON.stringify(newItems));
+  };
+
   const handleChecked = (id) => {
     const listItems = items.map((item) =>
       item.id === id ? { ...item, checked: !item.checked } : item
@@ -35,8 +43,25 @@ const Main = () => {
     localStorage.setItem("shopppinglist", JSON.stringify(listItems));
   };
 
+  const handleSubmit = (e) => {
+    console.log(newItem);
+    e.preventDefault();
+    if (!newItem) return;
+    // clear search
+    const id = items.length ? items[items.length - 1].id + 1 : 1;
+    const newitem = { id, checked: false, label: newItem };
+    const listItem = [...items, newitem];
+    setAndSaveItems(listItem);
+    setNewItem("");
+  };
+
   return (
     <main>
+      <AddingForm
+        newItem={newItem}
+        setNewItem={setNewItem}
+        handleSubmit={handleSubmit}
+      />
       <List
         items={items}
         handleChecked={handleChecked}
