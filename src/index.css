@@ -44,7 +44,8 @@ button {
 }
 
 /* Adding Form */
-.addItem label {
+.addForm label,
+.addSearchbox label {
   position: absolute;
   left: -9999999999px;
 }
@@ -55,8 +56,9 @@ button {
   align-items: center;
 }
 
-.addItem input[type="text"] {
-  height: 3rem;
+.addForm input[type="text"],
+.addSearchbox input[type="text"] {
+  height: 2rem;
   font-size: 1rem;
   padding: 0.25rem;
 }

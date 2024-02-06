@@ -2,27 +2,15 @@ import React from "react";
 import { useState } from "react";
 import List from "./List";
 import AddingForm from "./AddingForm";
+import Searchbox from "./Searchbox";
 
 const Main = () => {
   // Adding form
   const [newItem, setNewItem] = useState("");
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      checked: false,
-      label: "Item 1",
-    },
-    {
-      id: 2,
-      checked: false,
-      label: "Item 2",
-    },
-    {
-      id: 3,
-      checked: false,
-      label: "Item 3",
-    },
-  ]);
+  const [items, setItems] = useState(
+    JSON.parse(localStorage.getItem("shopppinglist"))
+  );
+  const [search, setSearch] = useState("");
 
   const setAndSaveItems = (newItems) => {
     setItems(newItems);
@@ -54,7 +42,7 @@ const Main = () => {
     setAndSaveItems(listItem);
     setNewItem("");
   };
-
+  console.log(localStorage.getItem("shopppinglist"));
   return (
     <main>
       <AddingForm
@@ -62,8 +50,11 @@ const Main = () => {
         setNewItem={setNewItem}
         handleSubmit={handleSubmit}
       />
+      <Searchbox search={search} setSearch={setSearch} />
       <List
-        items={items}
+        items={items.filter((item) =>
+          item.label.toLowerCase().includes(search.toLowerCase())
+        )}
         handleChecked={handleChecked}
         handleDelete={handleDelete}
       />
