@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
+import TodoForm from "../TodoList/TodoForm";
+import { useState } from "react";
 
 const Layout = () => {
-  return (
-    <div>Layout</div>
-  )
-}
+  const [task, setTask] = useState("");
 
-export default Layout
+  return (
+    <div>
+      <TodoForm task={task} setTask={setTask} />
+    </div>
+  );
+};
+
+export default Layout;
